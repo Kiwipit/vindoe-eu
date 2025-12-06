@@ -18,11 +18,24 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-        <h1 className="text-7xl font-black text-purple-700 mb-4">vindoe.eu</h1>
-        <p className="text-3xl text-gray-700 mb-12">de goedkoopste producten vind je hier</p>
+      <header className="bg-white shadow-md sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <img src="/logo.png" alt="vindoe.eu" className="w-16 h-16 object-contain" />
+            <div>
+              <h1 className="text-5xl font-black text-purple-700 leading-none">vindoe.eu</h1>
+              <p className="text-lg text-gray-600 -mt-1">De slimste prijsvergelijker</p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-        <div className="flex max-w-3xl mx-auto shadow-2xl rounded-full overflow-hidden mb-16">
+      <div className="max-w-7xl mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <p className="text-3xl text-gray-700 mb-12">de goedkoopste producten vind je hier</p>
+        </div>
+
+        <div className="flex max-w-4xl mx-auto shadow-2xl rounded-full overflow-hidden mb-16">
           <input
             type="text"
             placeholder="Zoek in miljoenen producten..."
@@ -34,7 +47,7 @@ export default function Home() {
           <button
             onClick={search}
             disabled={loading}
-            className="px-16 py-6 bg-purple-600 text-white font-bold text-xl hover:bg-purple-700 disabled:opacity-70"
+            className="px-16 py-6 bg-purple-600 text-white font-bold text-xl hover:bg-purple-700"
           >
             {loading ? 'Zoeken...' : 'Vind deal'}
           </button>
