@@ -45,9 +45,9 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-100">
       {/* Header */}
-      <header className="bg-white shadow-md sticky top-0 z-50">
+      <header className="bg-white shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <img src="/logo.png" alt="vindoe.eu" className="w-16 h-16 object-contain" />
@@ -60,8 +60,8 @@ export default function Home() {
       </header>
 
       {/* Zoekbalk */}
-      <div className="max-w-4xl mx-auto px-4 py-10">
-        <div className="flex shadow-2xl rounded-full overflow-hidden">
+      <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="flex shadow-2xl rounded-full overflow-hidden bg-white">
           <input
             type="text"
             placeholder="Zoek in miljoenen producten..."
@@ -70,7 +70,10 @@ export default function Home() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && search()}
           />
-          <button onClick={search} className="px-16 py-6 bg-purple-600 text-white font-bold text-xl hover:bg-purple-700">
+          <button
+            onClick={search}
+            className="px-20 py-6 bg-purple-600 text-white font-bold text-xl hover:bg-purple-700 transition"
+          >
             Vind deal
           </button>
         </div>
@@ -80,14 +83,16 @@ export default function Home() {
         <div className="flex gap-8">
           {/* Desktop Sidebar */}
           <aside className="hidden lg:block w-64 shrink-0 sticky top-32 h-fit">
-            <h3 className="font-bold text-xl mb-6">Categorieën</h3>
+            <h3 className="font-bold text-xl mb-6 text-gray-800">Categorieën</h3>
             <div className="space-y-2">
               {categories.map((cat) => (
                 <button
                   key={cat.id}
                   onClick={() => { setSelectedCategory(cat.id); search(); }}
-                  className={`w-full flex items-center gap-4 px-5 py-5 rounded-xl transition-all text-left ${
-                    selectedCategory === cat.id ? 'bg-purple-600 text-white shadow-lg' : 'bg-white hover:bg-purple-50 text-gray-800'
+                  className={`w-full flex items-center gap-4 px-5 py-4 rounded-xl transition-all text-left ${
+                    selectedCategory === cat.id
+                      ? 'bg-purple-600 text-white shadow-lg'
+                      : 'bg-white hover:bg-purple-50 text-gray-800 shadow'
                   }`}
                 >
                   <span className="text-3xl">{cat.icon}</span>
@@ -99,7 +104,10 @@ export default function Home() {
 
           {/* Mobiel hamburgermenu */}
           <div className="lg:hidden fixed bottom-6 left-6 z-50">
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="bg-purple-600 text-white p-4 rounded-full shadow-2xl">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="bg-purple-600 text-white p-4 rounded-full shadow-2xl"
+            >
               {mobileMenuOpen ? '✕' : '☰'}
             </button>
           </div>
@@ -127,21 +135,29 @@ export default function Home() {
           {/* Producten + sorteren */}
           <div className="flex-1">
             <div className="flex justify-between items-center mb-8">
-              <p className="text-gray-600">{results.length} resultaten</p>
+              <p className="text-lg text-gray-700">{results.length} resultaten</p>
               <select
                 value={sortBy}
                 onChange={(e) => { setSortBy(e.target.value); search(); }}
                 className="px-6 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
               >
-                {sortOptions.map(opt => <option key={opt.id} value={opt.id}>{opt.name}</option>)}
+                {sortOptions.map((opt) => (
+                  <option key={opt.id} value={opt.id}>
+                    {opt.name}
+                  </option>
+                ))}
               </select>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {results.map((item, i) => (
                 <div key={i} className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition">
-                  <div className="h-64 bg-gray-100 overflow-hidden">
-                    <img src={item.image || 'https://via.placeholder.com/300'} alt={item.title} className="w-full h-full object-contain p-6" />
+                  <div className="h-64 bg-gray-50 overflow-hidden">
+                    <img
+                      src={item.image || 'https://via.placeholder.com/300'}
+                      alt={item.title}
+                      className="w-full h-full object-contain p-6"
+                    />
                   </div>
                   <div className="p-6">
                     <h3 className="font-bold text-lg mb-3 line-clamp-2">{item.title}</h3>
@@ -149,7 +165,12 @@ export default function Home() {
                       <span className="text-3xl font-black text-green-600">€{item.price}</span>
                       <span className="text-gray-600 text-sm">{item.shop}</span>
                     </div>
-                    <a href={item.url} target="_blank" rel="noopener noreferrer" className="block w-full bg-purple-600 text-white text-center py-3 rounded-lg font-bold hover:bg-purple-700">
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full bg-purple-600 text-white text-center py-3 rounded-lg font-bold hover:bg-purple-700 transition"
+                    >
                       Bekijk deal →
                     </a>
                   </div>
