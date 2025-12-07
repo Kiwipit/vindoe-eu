@@ -34,7 +34,7 @@ const sortOptions = [
   { id: 'new', name: 'Nieuw' },
 ];
 
-export default function () {
+export default function Home() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -92,7 +92,7 @@ export default function () {
 
       <div className="max-w-7xl mx-auto px-4 pb-20">
         <div className="flex gap-8">
-          {/* Sidebar */}
+          {/* Desktop Sidebar */}
           <aside className="hidden lg:block w-64 shrink-0 sticky top-32 h-fit">
             <h3 className="font-bold text-xl mb-6">Categorieën</h3>
             <div className="space-y-2">
@@ -100,18 +100,18 @@ export default function () {
                 <button
                   key={cat.id}
                   onClick={() => { setSelectedCategory(cat.id); search(); }}
-                  className={`w-full flex items-center gap-4 px-5 py-4 rounded-xl transition-all ${
-                    selectedCategory === cat.id ? 'bg-purple-600 text-white shadow-lg' : 'bg-white hover:bg-purple-50'
+                  className={`w-full flex items-center gap-4 px-5 py-5 rounded-xl transition-all text-left ${
+                    selectedCategory === cat.id ? 'bg-purple-600 text-white shadow-lg' : 'bg-white hover:bg-purple-50 text-gray-800'
                   }`}
                 >
                   <cat.Icon className="w-7 h-7" />
-                  <span className="font-medium">{cat.name}</span>
+                  <span className="font-semibold text-lg">{cat.name}</span>  {/* Groter en duidelijker */}
                 </button>
               ))}
             </div>
           </aside>
 
-          {/* Mobiel menu */}
+          {/* Mobiel hamburgermenu */}
           <div className="lg:hidden fixed bottom-6 left-6 z-50">
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="bg-purple-600 text-white p-4 rounded-full shadow-2xl">
               {mobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
@@ -121,17 +121,17 @@ export default function () {
           {mobileMenuOpen && (
             <div className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40" onClick={() => setMobileMenuOpen(false)}>
               <div className="bg-white w-80 h-full p-6 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-                <h3 className="font-bold text-xl mb-6">Categorieën</h3>
+                <h3 className="font-bold text-2xl mb-6">Categorieën</h3>
                 {categories.map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => { setSelectedCategory(cat.id); search(); }}
-                    className={`w-full flex items-center gap-4 px-5 py-4 rounded-xl mb-2 ${
+                    className={`w-full flex items-center gap-4 px-5 py-5 rounded-xl mb-3 text-left ${
                       selectedCategory === cat.id ? 'bg-purple-600 text-white' : 'bg-gray-100'
                     }`}
                   >
-                    <cat.Icon className="w-7 h-7" />
-                    {cat.name}
+                    <cat.Icon className="w-8 h-8" />
+                    <span className="font-bold text-xl">{cat.name}</span>  {/* Super groot op mobiel */}
                   </button>
                 ))}
               </div>
