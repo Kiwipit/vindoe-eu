@@ -1,38 +1,24 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  MagnifyingGlassIcon,
-  ComputerDesktopIcon,
-  DevicePhoneMobileIcon,
-  TvIcon,
-  HomeModernIcon,
-  ShirtIcon,
-  CpuChipIcon,
-  HeartIcon,
-  TrophyIcon,
-  GiftIcon,
-  Bars3Icon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline';
 
 const categories = [
-  { id: 'all', name: 'Alle producten', Icon: MagnifyingGlassIcon },
-  { id: 'elektronica', name: 'Elektronica', Icon: DevicePhoneMobileIcon },
-  { id: 'tv', name: 'TV & Audio', Icon: TvIcon },
-  { id: 'keuken', name: 'Keuken & Huishouden', Icon: HomeModernIcon },
-  { id: 'mode', name: 'Mode & Kleding', Icon: ShirtIcon },
-  { id: 'gaming', name: 'Gaming', Icon: CpuChipIcon },
-  { id: 'beauty', name: 'Beauty & Gezondheid', Icon: HeartIcon },
-  { id: 'sport', name: 'Sport & Outdoor', Icon: TrophyIcon },
-  { id: 'baby', name: 'Baby & Kind', Icon: GiftIcon },
+  { id: 'all', name: 'Alle producten', icon: '🎁' },
+  { id: 'elektronica', name: 'Elektronica', icon: '📱' },
+  { id: 'tv', name: 'TV & Audio', icon: '📺' },
+  { id: 'keuken', name: 'Keuken & Huishouden', icon: '🍳' },
+  { id: 'fashion', name: 'Mode & Kleding', icon: '👕' },
+  { id: 'gaming', name: 'Gaming', icon: '🎮' },
+  { id: 'beauty', name: 'Beauty & Gezondheid', icon: '💄' },
+  { id: 'sports', name: 'Sport & Outdoor', icon: '⚽' },
+  { id: 'baby', name: 'Baby & Kind', icon: '🍼' },
 ];
 
 const sortOptions = [
-  { id: 'price-asc', name: 'Prijs: laag naar hoog' },
-  { id: 'price-desc', name: 'Prijs: hoog naar laag' },
+  { id: 'price-asc', name: 'Prijs: laag → hoog' },
+  { id: 'price-desc', name: 'Prijs: hoog → laag' },
   { id: 'popular', name: 'Populair' },
-  { id: 'new', name: 'Nieuwste eerst' },
+  { id: 'new', name: 'Nieuw' },
 ];
 
 export default function Home() {
@@ -50,7 +36,6 @@ export default function Home() {
     const data = await res.json();
     let items = data.results || [];
 
-    // Sorteren
     if (sortBy === 'price-asc') items.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
     if (sortBy === 'price-desc') items.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
 
@@ -65,14 +50,11 @@ export default function Home() {
       <header className="bg-white shadow-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <img src="/logo.png" alt="vindoe.eu" className="w-14 h-14 object-contain" />
+            <img src="/logo.png" alt="vindoe.eu" className="w-16 h-16 object-contain" />
             <div>
               <h1 className="text-5xl font-black text-purple-700 leading-none">vindoe.eu</h1>
               <p className="text-lg text-gray-600 -mt-1">De slimste prijsvergelijker</p>
             </div>
-          </div>
-          <div className="hidden lg:block">
-            <p className="text-gray-600">Veilig · Snel · Altijd de laagste prijs</p>
           </div>
         </div>
       </header>
@@ -88,8 +70,7 @@ export default function Home() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && search()}
           />
-          <button onClick={search} className="px-16 py-6 bg-purple-600 text-white font-bold text-xl hover:bg-purple-700 flex items-center gap-3">
-            <MagnifyingGlassIcon className="w-7 h-7" />
+          <button onClick={search} className="px-16 py-6 bg-purple-600 text-white font-bold text-xl hover:bg-purple-700">
             Vind deal
           </button>
         </div>
@@ -97,7 +78,7 @@ export default function Home() {
 
       <div className="max-w-7xl mx-auto px-4 pb-20">
         <div className="flex gap-8">
-          {/* Desktop Sidebar (vast bij scrollen) */}
+          {/* Sidebar (vast op desktop) */}
           <aside className="hidden lg:block w-64 shrink-0 sticky top-32 h-fit">
             <h3 className="font-bold text-xl mb-6">Categorieën</h3>
             <div className="space-y-2">
@@ -109,21 +90,19 @@ export default function Home() {
                     selectedCategory === cat.id ? 'bg-purple-600 text-white shadow-lg' : 'bg-white hover:bg-purple-50'
                   }`}
                 >
-                  <cat.Icon className="w-7 h-7" />
+                  <span className="text-3xl">{cat.icon}</span>
                   <span className="font-medium">{cat.name}</span>
                 </button>
               ))}
             </div>
           </aside>
 
-          {/* Mobiel menu knop */}
+          {/* Mobiel hamburgermenu */}
           <div className="lg:hidden fixed bottom-6 left-6 z-50">
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="bg-purple-600 text-white p-4 rounded-full shadow-2xl">
-              {mobileMenuOpen ? <XMarkIcon className="w-8 h-8" /> : <Bars3Icon className="w-8 h-8" />}
+              {mobileMenuOpen ? '✕' : '☰'}
             </button>
           </div>
-
-          {/* Mobiel menu */}
           {mobileMenuOpen && (
             <div className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40" onClick={() => setMobileMenuOpen(false)}>
               <div className="bg-white w-80 h-full p-6 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
@@ -136,7 +115,7 @@ export default function Home() {
                       selectedCategory === cat.id ? 'bg-purple-600 text-white' : 'bg-gray-100'
                     }`}
                   >
-                    <cat.Icon className="w-7 h-7" />
+                    <span className="text-3xl">{cat.icon}</span>
                     {cat.name}
                   </button>
                 ))}
@@ -146,7 +125,6 @@ export default function Home() {
 
           {/* Hoofdgedeelte */}
           <div className="flex-1">
-            {/* Sorteer dropdown */}
             <div className="flex justify-between items-center mb-8">
               <p className="text-gray-600">{results.length} resultaten</p>
               <select
@@ -154,13 +132,10 @@ export default function Home() {
                 onChange={(e) => { setSortBy(e.target.value); search(); }}
                 className="px-6 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-600"
               >
-                {sortOptions.map(opt => (
-                  <option key={opt.id} value={opt.id}>{opt.name}</option>
-                ))}
+                {sortOptions.map(opt => <option key={opt.id} value={opt.id}>{opt.name}</option>)}
               </select>
             </div>
 
-            {/* Producten */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {results.map((item, i) => (
                 <div key={i} className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition">
