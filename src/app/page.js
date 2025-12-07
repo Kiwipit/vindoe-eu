@@ -111,7 +111,7 @@ export default function Home() {
             </div>
           </aside>
 
-          {/* Mobiel menu */}
+          {/* Mobiel hamburgermenu */}
           <div className="lg:hidden fixed bottom-6 left-6 z-50">
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="bg-purple-600 text-white p-4 rounded-full shadow-2xl">
               {mobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
