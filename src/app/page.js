@@ -155,37 +155,4 @@ export default function Home() {
               </select>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {results.map((item, i) => (
-                <div key={i} className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition">
-                  <div className="h-64 bg-gray-50 overflow-hidden">
-                    <img
-                      src={item.image || 'https://via.placeholder.com/300'}
-                      alt={item.title}
-                      className="w-full h-full object-contain p-6"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-bold text-lg mb-3 line-clamp-2">{item.title}</h3>
-                    <div className="flex justify-between items-end mb-4">
-                      <span className="text-3xl font-black text-green-600">€{item.price}</span>
-                      <span className="text-gray-600 text-sm">{item.shop}</span>
-                    </div>
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full bg-purple-600 text-white text-center py-3 rounded-lg font-bold hover:bg-purple-700 transition"
-                    >
-                      Bekijk deal →
-                    </a>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+            <div className
