@@ -105,13 +105,13 @@ export default function Home() {
                   }`}
                 >
                   <cat.Icon className="w-7 h-7" />
-                  <span className="font-semibold text-lg">{cat.name}</span>  {/* Groter en duidelijker */}
+                  <span className="font-semibold text-lg">{cat.name}</span>
                 </button>
               ))}
             </div>
           </aside>
 
-          {/* Mobiel hamburgermenu */}
+          {/* Mobiel menu */}
           <div className="lg:hidden fixed bottom-6 left-6 z-50">
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="bg-purple-600 text-white p-4 rounded-full shadow-2xl">
               {mobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
@@ -131,7 +131,7 @@ export default function Home() {
                     }`}
                   >
                     <cat.Icon className="w-8 h-8" />
-                    <span className="font-bold text-xl">{cat.name}</span>  {/* Super groot op mobiel */}
+                    <span className="font-bold text-xl">{cat.name}</span>
                   </button>
                 ))}
               </div>
