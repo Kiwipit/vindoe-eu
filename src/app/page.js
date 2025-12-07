@@ -34,7 +34,7 @@ const sortOptions = [
   { id: 'new', name: 'Nieuw' },
 ];
 
-export default function Home() {
+export default function () {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
