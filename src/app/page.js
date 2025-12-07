@@ -1,30 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { 
-  Search, 
-  Home, 
-  Tv, 
-  Smartphone, 
-  Shirt, 
-  Gamepad2, 
-  Heart, 
-  Trophy, 
-  Baby, 
-  Menu, 
-  X 
-} from 'lucide-react';
 
 const categories = [
-  { id: 'all', name: 'Alle producten', Icon: Search },
-  { id: 'elektronica', name: 'Elektronica', Icon: Smartphone },
-  { id: 'tv', name: 'TV & Audio', Icon: Tv },
-  { id: 'keuken', name: 'Keuken & Huishouden', Icon: Home },
-  { id: 'fashion', name: 'Mode & Kleding', Icon: Shirt },
-  { id: 'gaming', name: 'Gaming', Icon: Gamepad2 },
-  { id: 'beauty', name: 'Beauty & Gezondheid', Icon: Heart },
-  { id: 'sports', name: 'Sport & Outdoor', Icon: Trophy },
-  { id: 'baby', name: 'Baby & Kind', Icon: Baby },
+  { id: 'all', name: 'Alle producten', icon: '🔍' },
+  { id: 'elektronica', name: 'Elektronica', icon: '📱' },
+  { id: 'tv', name: 'TV & Audio', icon: '📺' },
+  { id: 'keuken', name: 'Keuken & Huishouden', icon: '🍳' },
+  { id: 'fashion', name: 'Mode & Kleding', icon: '👕' },
+  { id: 'gaming', name: 'Gaming', icon: '🎮' },
+  { id: 'beauty', name: 'Beauty & Gezondheid', icon: '💄' },
+  { id: 'sports', name: 'Sport & Outdoor', icon: '⚽' },
+  { id: 'baby', name: 'Baby & Kind', icon: '🍼' },
 ];
 
 const sortOptions = [
@@ -83,8 +70,7 @@ export default function Home() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && search()}
           />
-          <button onClick={search} className="px-16 py-6 bg-purple-600 text-white font-bold text-xl hover:bg-purple-700 flex items-center gap-3">
-            <Search className="w-7 h-7" />
+          <button onClick={search} className="px-16 py-6 bg-purple-600 text-white font-bold text-xl hover:bg-purple-700">
             Vind deal
           </button>
         </div>
@@ -104,7 +90,7 @@ export default function Home() {
                     selectedCategory === cat.id ? 'bg-purple-600 text-white shadow-lg' : 'bg-white hover:bg-purple-50 text-gray-800'
                   }`}
                 >
-                  <cat.Icon className="w-7 h-7" />
+                  <span className="text-3xl">{cat.icon}</span>
                   <span className="font-semibold text-lg">{cat.name}</span>
                 </button>
               ))}
@@ -114,7 +100,7 @@ export default function Home() {
           {/* Mobiel hamburgermenu */}
           <div className="lg:hidden fixed bottom-6 left-6 z-50">
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="bg-purple-600 text-white p-4 rounded-full shadow-2xl">
-              {mobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+              {mobileMenuOpen ? '✕' : '☰'}
             </button>
           </div>
 
@@ -130,7 +116,7 @@ export default function Home() {
                       selectedCategory === cat.id ? 'bg-purple-600 text-white' : 'bg-gray-100'
                     }`}
                   >
-                    <cat.Icon className="w-8 h-8" />
+                    <span className="text-4xl">{cat.icon}</span>
                     <span className="font-bold text-xl">{cat.name}</span>
                   </button>
                 ))}
