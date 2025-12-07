@@ -1,17 +1,30 @@
 'use client';
 
 import { useState } from 'react';
+import { 
+  Search, 
+  Home, 
+  Tv, 
+  Smartphone, 
+  Shirt, 
+  Gamepad2, 
+  Heart, 
+  Trophy, 
+  Baby, 
+  Menu, 
+  X 
+} from 'lucide-react';
 
 const categories = [
-  { id: 'all', name: 'Alle producten', icon: '🔍' },
-  { id: 'elektronica', name: 'Elektronica', icon: '📱' },
-  { id: 'tv', name: 'TV & Audio', icon: '📺' },
-  { id: 'keuken', name: 'Keuken & Huishouden', icon: '🍳' },
-  { id: 'fashion', name: 'Mode & Kleding', icon: '👕' },
-  { id: 'gaming', name: 'Gaming', icon: '🎮' },
-  { id: 'beauty', name: 'Beauty & Gezondheid', icon: '💄' },
-  { id: 'sports', name: 'Sport & Outdoor', icon: '⚽' },
-  { id: 'baby', name: 'Baby & Kind', icon: '🍼' },
+  { id: 'all', name: 'Alle producten', Icon: Search },
+  { id: 'elektronica', name: 'Elektronica', Icon: Smartphone },
+  { id: 'tv', name: 'TV & Audio', Icon: Tv },
+  { id: 'keuken', name: 'Keuken & Huishouden', Icon: Home },
+  { id: 'fashion', name: 'Mode & Kleding', Icon: Shirt },
+  { id: 'gaming', name: 'Gaming', Icon: Gamepad2 },
+  { id: 'beauty', name: 'Beauty & Gezondheid', Icon: Heart },
+  { id: 'sports', name: 'Sport & Outdoor', Icon: Trophy },
+  { id: 'baby', name: 'Baby & Kind', Icon: Baby },
 ];
 
 const sortOptions = [
@@ -47,7 +60,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
-      <header className="bg-white shadow-lg sticky top-0 z-50">
+      <header className="bg-white shadow-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <img src="/logo.png" alt="vindoe.eu" className="w-16 h-16 object-contain" />
@@ -60,7 +73,7 @@ export default function Home() {
       </header>
 
       {/* Zoekbalk */}
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-4 py-10">
         <div className="flex shadow-2xl rounded-full overflow-hidden bg-white">
           <input
             type="text"
@@ -70,10 +83,8 @@ export default function Home() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && search()}
           />
-          <button
-            onClick={search}
-            className="px-20 py-6 bg-purple-600 text-white font-bold text-xl hover:bg-purple-700 transition"
-          >
+          <button onClick={search} className="px-20 py-6 bg-purple-600 text-white font-bold text-xl hover:bg-purple-700 transition flex items-center gap-3">
+            <Search className="w-7 h-7" />
             Vind deal
           </button>
         </div>
@@ -89,13 +100,11 @@ export default function Home() {
                 <button
                   key={cat.id}
                   onClick={() => { setSelectedCategory(cat.id); search(); }}
-                  className={`w-full flex items-center gap-4 px-5 py-4 rounded-xl transition-all text-left ${
-                    selectedCategory === cat.id
-                      ? 'bg-purple-600 text-white shadow-lg'
-                      : 'bg-white hover:bg-purple-50 text-gray-800 shadow'
+                  className={`w-full flex items-center gap-4 px-5 py-5 rounded-xl transition-all text-left ${
+                    selectedCategory === cat.id ? 'bg-purple-600 text-white shadow-lg' : 'bg-white hover:bg-purple-50 text-gray-800 shadow'
                   }`}
                 >
-                  <span className="text-3xl">{cat.icon}</span>
+                  <cat.Icon className="w-7 h-7" />
                   <span className="font-semibold text-lg">{cat.name}</span>
                 </button>
               ))}
@@ -104,11 +113,8 @@ export default function Home() {
 
           {/* Mobiel hamburgermenu */}
           <div className="lg:hidden fixed bottom-6 left-6 z-50">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="bg-purple-600 text-white p-4 rounded-full shadow-2xl"
-            >
-              {mobileMenuOpen ? '✕' : '☰'}
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="bg-purple-600 text-white p-4 rounded-full shadow-2xl">
+              {mobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
             </button>
           </div>
 
@@ -124,7 +130,7 @@ export default function Home() {
                       selectedCategory === cat.id ? 'bg-purple-600 text-white' : 'bg-gray-100'
                     }`}
                   >
-                    <span className="text-4xl">{cat.icon}</span>
+                    <cat.Icon className="w-8 h-8" />
                     <span className="font-bold text-xl">{cat.name}</span>
                   </button>
                 ))}
